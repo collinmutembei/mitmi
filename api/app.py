@@ -21,6 +21,7 @@ config_name = os.environ.get('APP_SETTINGS', 'default')
 app.config.from_object(config[config_name])
 
 # import in the middle of code to avoid cyclic imports
-from api.users.resources import SignUp
+from api.users.resources import SignUp, SignIn
 
 api.add_resource(SignUp, '/signup/')
+api.add_resource(SignIn, '/signin/')
