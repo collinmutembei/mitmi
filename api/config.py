@@ -33,6 +33,8 @@ class TestingConfig(Config):
     TESTING = True
     if os.getenv('TRAVIS_BUILD', None):
         SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    else:
+        SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DB_URL')
 
 
 config = {
