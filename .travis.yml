@@ -4,8 +4,21 @@ python:
   - "2.7"
   - "3.6"
 
+addons:
+  postgresql: "9.6"
+
+services:
+    - postgresql
+
 install:
     - pip install -r requirements.txt
+
+env:
+  global:
+    - TRAVIS_BUILD=true
+
+before_script:
+    - psql -c 'create database mitmi;' -U postgres
 
 script:
     - python manage.py test
