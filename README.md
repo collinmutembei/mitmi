@@ -1,16 +1,6 @@
-<center>
-    ![mita](https://cloud.githubusercontent.com/assets/10899666/22392618/6c15ad4c-e50c-11e6-9a5e-7bbdb374f073.png)
-</center>
+### mitmi
 
-|                     API request                     |            Description            |                                                                                                                                                                                  Status |
-|:---------------------------------------------------:|:---------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| *POST* `/api/signup/`                               |           Create a user           | - `200` User created   - `400` User could not be created as is                                                                                                                          |
-| *POST* `/api/signin/`                               | Authenticate user and assign toke | - `200` User authenticated, returns token - `401` User cannot be authenticated                                                                                                          |
-| *GET* `/api/event/`                                 |          Show all events          | -`200` List all events                                                                                                                                                                  |
-| *POST* `/api/event/`                                |          Create an event          | -`201` Event created -`401` Unauthorized, token required                                                                                                                                |
-| *PUT* `/api/event/<event-id>/`                      |        Update event details       | -`200` Event updated successfully -`401` Unauthorized, token required -`404` No event matching `<event-id>`                                                                             |
-| *DELETE* `/api/event/<event-id>/`                   |          Cancel an event          | -`200` Event removed successfully -`401` Unauthorized, token required -`403` Error decoding signature                                                                                   |
-| *GET* `/api/event/<event-id>/guest/`                | Fetch all the guests for an event | -`200` See who is invited to event                                                                                                                                                      |
-| *POST* `/api/events/<event-id>/guest/`              |      Invite a guest to event      | -`201` Guest added to event -`401` Unauthorized, token required -`403` Not enough permissions to add guest -`404` No event matching `<event-id>`                                        |
-| *PUT* `/api/events/<event-id>/guest/<guest-id>/     |        Change user details        | -`200` Guest details changed successfully -`401` Unauthorized, token required -`403` Not enough permissions to update guest details -`404` No matching `<event-id>` and/or `<guest-id>` |
-| *DELETE* `/api/events/<event-id>/guest/<guest-id>/` |       Remove guest in event       | -`200` Guest removed from event -`401` Unauthorized, token required -`403` Not enough permissions to remove guest -`404` No matching `<event-id>` and/or `<guest-id>`                   |
+mitmi is a RESTful event planning API service. Watch this space for developments.
+
+#### License
+This project is licensed under GNU GPL v3 &copy; Collin Mutembei <whenyourepissed@gmail.com>
