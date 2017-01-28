@@ -9,6 +9,7 @@ class MITMITestCase(unittest.TestCase):
     def setUp(self):
         app.config.from_object(config['testing'])
         self.client = app.test_client()
+        db.create_all()
 
         self.test_username = "patientzer0"
         self.test_password = "YmlnZ2VzdGJlaGluZA"
@@ -62,7 +63,8 @@ class MITMITestCase(unittest.TestCase):
         self.assertEqual(signup_get.status_code, 401)
 
     def tearDown(self):
-        pass
+        db.session.remove()
+        db.drop_all()
 
 if __name__ == '__main__':
     unittest.main()
