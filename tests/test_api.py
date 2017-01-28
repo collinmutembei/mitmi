@@ -1,18 +1,17 @@
 import unittest
 
 from api.app import app, db
+from api.config import config
 
 
 class MITMITestCase(unittest.TestCase):
 
     def setUp(self):
+        app.config.from_object(config['testing'])
         self.client = app.test_client()
-        self.client.testing = True
 
         self.test_username = "patientzer0"
         self.test_password = "YmlnZ2VzdGJlaGluZA"
-
-        db.create_all()
 
     def test_get_method_not_allowed_on_signup(self):
         """ assert that GET request are not allowed on signup resource
@@ -63,8 +62,7 @@ class MITMITestCase(unittest.TestCase):
         self.assertEqual(signup_get.status_code, 401)
 
     def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+        pass
 
 if __name__ == '__main__':
     unittest.main()
