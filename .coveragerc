@@ -1,0 +1,6 @@
+[report]
+omit =
+    */python?.?/*
+    *__init__*
+    */tests/*
+    *manage.py
