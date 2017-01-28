@@ -1,6 +1,6 @@
 import unittest
 
-import unirest
+import requests
 
 
 class MITMITestCase(unittest.TestCase):
@@ -13,50 +13,50 @@ class MITMITestCase(unittest.TestCase):
     def test_get_method_not_allowed_on_signup(self):
         """ assert that GET request are not allowed on signup resource
         """
-        signup_get = unirest.get(
+        signup_get = requests.get(
             "{0}/signup/".format(self.server_url),
             headers={"Accept": "application/json"},
         )
-        self.assertEqual(signup_get.code, 405)
+        self.assertEqual(signup_get.status_code, 405)
 
     def test_creating_new_user(self):
         """ assert that POST request on signup resource creates new user
         """
-        signup_get = unirest.post(
+        signup_get = requests.post(
             "{0}/signup/".format(self.server_url),
             headers={"Accept": "application/json"},
-            params={
+            data={
                 "username": self.test_username,
                 "password": self.test_password
             }
         )
-        self.assertEqual(signup_get.code, 200)
+        self.assertEqual(signup_get.status_code, 200)
 
     def test_getting_token_for_existing_user(self):
-        """ assert that GET request are not allowed on signup resource
+        """ assert that signin for valid user gets token
         """
-        signup_get = unirest.post(
+        signup_get = requests.post(
             "{0}/signin/".format(self.server_url),
             headers={"Accept": "application/json"},
-            params={
+            data={
                 "username": self.test_username,
                 "password": self.test_password
             }
         )
-        self.assertEqual(signup_get.code, 200)
+        self.assertEqual(signup_get.status_code, 200)
 
     def test_getting_token_for_non_existing_user(self):
-        """ assert that GET request are not allowed on signup resource
+        """ assert that signin for invalid user fails
         """
-        signup_get = unirest.post(
+        signup_get = requests.post(
             "{0}/signin/".format(self.server_url),
             headers={"Accept": "application/json"},
-            params={
+            data={
                 "username": "user",
                 "password": "password"
             }
         )
-        self.assertEqual(signup_get.code, 401)
+        self.assertEqual(signup_get.status_code, 401)
 
     def tearDown(self):
         pass
