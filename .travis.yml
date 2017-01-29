@@ -5,7 +5,7 @@ python:
   - "3.6"
 
 addons:
-  postgresql: "9.6"
+  postgresql: "9.4"
 
 services:
     - postgresql
@@ -16,6 +16,9 @@ install:
 env:
   global:
     - TRAVIS_BUILD=true
+
+before_script:
+    - psql -c 'create database mitmi;' -U postgres
 
 script:
     - coverage run --append manage.py test && coverage report -i
