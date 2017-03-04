@@ -7,7 +7,8 @@ from api.events.models import Event
 
 event_fields = {
     "name": fields.String,
-    "venue": fields.String
+    "venue": fields.String,
+    "created_by": fields.String
 }
 
 
@@ -28,7 +29,8 @@ class CreateEvent(Resource):
 
         event = Event(
             name=args.name,
-            venue=args.venue
+            venue=args.venue,
+            created_by=user
         )
         db.session.add(event)
         db.session.commit()
