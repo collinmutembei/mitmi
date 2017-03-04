@@ -1,4 +1,6 @@
 import unittest
+import json
+from base64 import b64encode
 
 from faker import Faker
 
@@ -26,6 +28,18 @@ class MITMITestCase(unittest.TestCase):
         )
         db.session.add(test_user)
         db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        self.token = signin["token"]
+
+    # users
 
     def test_get_method_not_allowed_on_signup(self):
         """ assert that GET request are not allowed on signup resource
@@ -123,6 +137,39 @@ class MITMITestCase(unittest.TestCase):
             }
         )
         self.assertEqual(signup_get.status_code, 401)
+
+    # events
+
+    def test_logged_in_user_can_create_event(self):
+        """ assert that users who have been authenticated can
+        create event
+        """
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(self.token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "dunda",
+                "venue": "kejani"
+            }
+        )
+        self.assertEqual(event.status_code, 201)
+
+    def test_not_logged_in_user_cannot_create_event(self):
+        """ assert that users who have not been authenticated cannot
+        create an event
+        """
+        event = self.client.post(
+            "/event/",
+            headers={"Accept": "application/json"},
+            data={
+                "name": "dunda",
+                "venue": "kejani"
+            }
+        )
+        self.assertEqual(event.status_code, 401)
 
     def tearDown(self):
         db.session.remove()
