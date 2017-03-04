@@ -1,4 +1,5 @@
 from api.app import db, bcrypt
+from sqlalchemy.ext.hybrid import hybrid_property
 
 
 class User(db.Model):
@@ -6,13 +7,20 @@ class User(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
-    password = db.Column(db.String(128))
+    _password = db.Column(db.String(128))
     authenticated = db.Column(db.Boolean, default=False)
 
-    def set_password(self, plaintext):
+    @hybrid_property
+    def password(self):
+        """ sets the hashed password for user
+        """
+        return self._password
+
+    @password.setter
+    def _set_password(self, plaintext):
         """Hashes a password from plaintext to ciphertext
         """
-        self.password = bcrypt.generate_password_hash(plaintext)
+        self._password = bcrypt.generate_password_hash(plaintext)
 
     def verify_password(self, plaintext):
         """Checks the entered paintext against the hashed password
