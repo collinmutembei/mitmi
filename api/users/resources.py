@@ -1,5 +1,6 @@
 from flask_restful import Resource, fields, marshal
 from flask_restful.reqparse import RequestParser
+from flask_jwt_extended import create_access_token
 
 from api.app import db
 from api.users.models import User
@@ -49,7 +50,8 @@ class SignIn(Resource):
         if signin_user:
             # check password
             if signin_user.verify_password(args.password):
-                return {'token': 'something'}, 200
+                user_token = create_access_token(identity=signin_user.id)
+                return {'token': user_token}, 200
             # password not correct
             return {'message': 'password did not work'}, 403
         return {'message': 'invalid user'}, 401
