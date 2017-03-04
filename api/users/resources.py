@@ -26,8 +26,8 @@ class SignUp(Resource):
 
         signup_user = User(
             username=args.username,
+            password=args.password
         )
-        signup_user.set_password(args.password)
         db.session.add(signup_user)
         db.session.commit()
         return marshal(signup_user, user_fields), 201
