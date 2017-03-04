@@ -39,6 +39,18 @@ class MITMITestCase(unittest.TestCase):
         signin = json.loads(signin_test_user.data)
         self.token = signin["token"]
 
+        event_creator = User.objects.filter_by(
+            username=self.test_username
+        ).first()
+
+        test_event = Event(
+            name="party",
+            venue=self.fake.city(),
+            created_by=event_creator
+        )
+        db.session.add(test_event)
+        db.session.commit()
+
     # users
 
     def test_get_method_not_allowed_on_signup(self):
@@ -170,6 +182,60 @@ class MITMITestCase(unittest.TestCase):
             }
         )
         self.assertEqual(event.status_code, 401)
+
+    def test_logged_in_user_can_view_event(self):
+        """ assert that users who have been authenticated can
+        view all events
+        """
+        events = self.client.get(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(self.token)
+            }
+        )
+        self.assertEqual(events.status_code, 200)
+
+    def test_logged_in_user_can_view_specific_event(self):
+        """ assert that users who have been authenticated can
+        view all events
+        """
+        existing_event = Event.query.filter_by(
+            name="party"
+        ).first()
+        events = self.client.get(
+            "/event/{0}".format(existing_event.id),
+            headers={
+                "Authorization": "Bearer {0}".format(self.token)
+            }
+        )
+        self.assertEqual(events.status_code, 200)
+
+    def test_not_logged_in_user_cannot_view_events(self):
+        """ assert that users who have not been authenticated cannot
+        see all event
+        """
+        events = self.client.get(
+            "/event/"
+        )
+        self.assertEqual(events.status_code, 401)
+
+    def test_logged_in_user_update_an_event_they_created(self):
+        """ assert that users who have been authenticated can
+        update an event they created
+        """
+        pass
+
+    def test_logged_in_user_cannot_update_an_event_they_did_not_create(self):
+        """ assert that users who have been authenticated cannot
+        update an event created by someone else
+        """
+        pass
+
+    def test_not_logged_in_user_cannot_update_an_event(self):
+        """ assert that users who have not been authenticated cannot
+        update events
+        """
+        pass
 
     def tearDown(self):
         db.session.remove()

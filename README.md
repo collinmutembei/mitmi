@@ -4,19 +4,19 @@
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f34d8625a16713f0d6d0#?env%5Bmitmi-local%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoibWl0bWkiLCJ2YWx1ZSI6Imh0dHA6Ly8xMjcuMC4wLjE6NTAwMCIsInR5cGUiOiJ0ZXh0In1d)
 
 #### requirements
-- [ ] CRUD operations on user account
+- [x] CRUD operations on user account
   - signup
-    - [ ] As a new user I should be able to CREATE an account using a username and password
-    - [ ] No READ
-    - [ ] No UPDATE
-    - [ ] No DELETE
+    - [x] As a new user I should be able to CREATE an account using a username and password
+    - [x] No READ
+    - [x] No UPDATE
+    - [x] No DELETE
   - signin
-    - [ ] As a user with an account I should authenticate with username and password to get token
-    - [ ] No READ
-    - [ ] No UPDATE
-    - [ ] No DELETE
+    - [x] As a user with an account I should authenticate with username and password to get token
+    - [x] No READ
+    - [x] No UPDATE
+    - [x] No DELETE
 - [ ] CRUD operations on events
-  - [ ] As a logged in user I should be able to CREATE an event using a name and location
+  - [x] As a logged in user I should be able to CREATE an event using a name and location
   - [ ] As a logged in user I can see all events
   - [ ] As a logged in user and creator of event I should be able to UPDATE the event details
   - [ ] As a logged in user and creator of event I should be able to DELETE
