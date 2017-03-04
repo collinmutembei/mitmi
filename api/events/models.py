@@ -12,7 +12,12 @@ class Event(db.Model):
     """ Model defining user
     """
     id = db.Column(db.Integer, primary_key=True)
-    created_by = db.Column('created_by', db.Integer, db.ForeignKey('user.id'))
+    created_by = db.Column(
+        'created_by',
+        db.Integer,
+        db.ForeignKey('user.id'),
+        nullable=False
+    )
     name = db.Column(db.String(80), unique=True)
     venue = db.Column(db.String(80))
     guest = db.relationship(
