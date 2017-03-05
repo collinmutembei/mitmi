@@ -7,6 +7,7 @@ from faker import Faker
 from api.app import app, db
 from api.config import config
 from api.users.models import User
+from api.events.models import Event
 
 
 class MITMITestCase(unittest.TestCase):
@@ -22,34 +23,9 @@ class MITMITestCase(unittest.TestCase):
         self.test_username = "patientzer0"
         self.test_password = "YmlnZ2VzdGJlaGluZA"
 
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
-
-        signin_test_user = self.client.post(
-            'signin/',
-            data={
-                "username": self.test_username,
-                "password": self.test_password
-            }
-        )
-        signin = json.loads(signin_test_user.data)
-        self.token = signin["token"]
-
-        event_creator = User.objects.filter_by(
-            username=self.test_username
-        ).first()
-
-        test_event = Event(
-            name="party",
-            venue=self.fake.city(),
-            created_by=event_creator
-        )
-        db.session.add(test_event)
-        db.session.commit()
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
 
     # users
 
@@ -65,7 +41,7 @@ class MITMITestCase(unittest.TestCase):
     def test_creating_new_user(self):
         """ assert that POST request on signup resource creates new user
         """
-        signup_get = self.client.post(
+        signup_post = self.client.post(
             "/signup/",
             headers={"Accept": "application/json"},
             data={
@@ -73,13 +49,20 @@ class MITMITestCase(unittest.TestCase):
                 "password": self.fake.password()
             }
         )
-        self.assertEqual(signup_get.status_code, 201)
+        self.assertEqual(signup_post.status_code, 201)
 
     def test_creating_new_user_with_username_of_existing_user(self):
         """ assert that POST request on signup resource with username
         matching an already existing user
         """
-        signup_get = self.client.post(
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signup_post = self.client.post(
             "/signup/",
             headers={"Accept": "application/json"},
             data={
@@ -87,34 +70,41 @@ class MITMITestCase(unittest.TestCase):
                 "password": self.fake.password()
             }
         )
-        self.assertEqual(signup_get.status_code, 400)
+        self.assertEqual(signup_post.status_code, 400)
 
     def test_creating_new_user_with_missing_field(self):
         """ assert that POST request on signup resource fails if required
         field is missing
         """
-        signup_get = self.client.post(
+        signup_post = self.client.post(
             "/signup/",
             headers={"Accept": "application/json"},
             data={
                 "username": self.fake.user_name(),
             }
         )
-        self.assertEqual(signup_get.status_code, 400)
+        self.assertEqual(signup_post.status_code, 400)
 
     def test_get_method_not_allowed_on_signin(self):
         """ assert that GET request are not allowed on signin resource
         """
-        signup_get = self.client.get(
+        signin_get = self.client.get(
             "/signin/",
             headers={"Accept": "application/json"},
         )
-        self.assertEqual(signup_get.status_code, 405)
+        self.assertEqual(signin_get.status_code, 405)
 
     def test_getting_token_for_existing_user(self):
         """ assert that signin for valid user gets token
         """
-        signup_get = self.client.post(
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_post = self.client.post(
             "/signin/",
             headers={"Accept": "application/json"},
             data={
@@ -122,12 +112,19 @@ class MITMITestCase(unittest.TestCase):
                 "password": self.test_password
             }
         )
-        self.assertEqual(signup_get.status_code, 200)
+        self.assertEqual(signin_post.status_code, 200)
 
     def test_getting_token_for_existing_user_with_wrong_password(self):
         """ assert that signin for valid user with wrong password
         """
-        signup_get = self.client.post(
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_post = self.client.post(
             "/signin/",
             headers={"Accept": "application/json"},
             data={
@@ -135,12 +132,12 @@ class MITMITestCase(unittest.TestCase):
                 "password": self.fake.password()
             }
         )
-        self.assertEqual(signup_get.status_code, 403)
+        self.assertEqual(signin_post.status_code, 403)
 
     def test_getting_token_for_non_existing_user(self):
         """ assert that signin for invalid user fails
         """
-        signup_get = self.client.post(
+        signin_post = self.client.post(
             "/signin/",
             headers={"Accept": "application/json"},
             data={
@@ -148,7 +145,7 @@ class MITMITestCase(unittest.TestCase):
                 "password": "password"
             }
         )
-        self.assertEqual(signup_get.status_code, 401)
+        self.assertEqual(signin_post.status_code, 401)
 
     # events
 
@@ -156,10 +153,27 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated can
         create event
         """
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
         event = self.client.post(
             "/event/",
             headers={
-                "Authorization": "Bearer {0}".format(self.token),
+                "Authorization": "Bearer {0}".format(user_token),
                 "Accept": "application/json"
             },
             data={
@@ -183,29 +197,75 @@ class MITMITestCase(unittest.TestCase):
         )
         self.assertEqual(event.status_code, 401)
 
-    def test_logged_in_user_can_view_event(self):
-        """ assert that users who have been authenticated can
-        view all events
-        """
-        events = self.client.get(
-            "/event/",
-            headers={
-                "Authorization": "Bearer {0}".format(self.token)
-            }
-        )
-        self.assertEqual(events.status_code, 200)
-
     def test_logged_in_user_can_view_specific_event(self):
         """ assert that users who have been authenticated can
         view all events
         """
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "party",
+                "venue": "house"
+            }
+        )
+
         existing_event = Event.query.filter_by(
             name="party"
         ).first()
         events = self.client.get(
-            "/event/{0}".format(existing_event.id),
+            "/event/{0}/".format(existing_event.id),
             headers={
-                "Authorization": "Bearer {0}".format(self.token)
+                "Authorization": "Bearer {0}".format(user_token)
+            }
+        )
+        self.assertEqual(events.status_code, 200)
+
+    def test_logged_in_user_can_view_event(self):
+        """ assert that users who have been authenticated can
+        view all events
+        """
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        events = self.client.get(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token)
             }
         )
         self.assertEqual(events.status_code, 200)
@@ -223,23 +283,156 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated can
         update an event they created
         """
-        pass
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "party",
+                "venue": "house"
+            }
+        )
+
+        existing_event = Event.query.filter_by(
+            name="party"
+        ).first()
+        updated_event = self.client.put(
+            "/event/{0}/".format(existing_event.id),
+            headers={
+                "Authorization": "Bearer {0}".format(user_token)
+            },
+            data={
+                "venue": "kejani"
+            }
+        )
+        self.assertEqual(updated_event.status_code, 200)
 
     def test_logged_in_user_cannot_update_an_event_they_did_not_create(self):
         """ assert that users who have been authenticated cannot
         update an event created by someone else
         """
-        pass
+        other_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(other_user)
+        db.session.commit()
+
+        signin_other_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_other_user.data)
+        user_token = signin["token"]
+
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "party",
+                "venue": "house"
+            }
+        )
+
+        test_user = User(
+            username="test_user",
+            password="test_password"
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": "test_user",
+                "password": "test_password"
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        existing_event = Event.query.filter_by(
+            name="party"
+        ).first()
+        updated_event = self.client.put(
+            "/event/{0}/".format(existing_event.id),
+            headers={
+                "Authorization": "Bearer {0}".format(user_token)
+            },
+            data={
+                "venue": "kejani"
+            }
+        )
+        self.assertEqual(updated_event.status_code, 404)
 
     def test_not_logged_in_user_cannot_update_an_event(self):
         """ assert that users who have not been authenticated cannot
         update events
         """
-        pass
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
 
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "party",
+                "venue": "house"
+            }
+        )
+
+        existing_event = Event.query.filter_by(
+            name="party"
+        ).first()
+        updated_event = self.client.put(
+            "/event/{0}/".format(existing_event.id),
+            data={
+                "venue": "kejani"
+            }
+        )
+        self.assertEqual(updated_event.status_code, 401)
 
 if __name__ == '__main__':
     unittest.main()
