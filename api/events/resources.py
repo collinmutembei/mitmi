@@ -6,6 +6,7 @@ from api.app import db
 from api.events.models import Event
 
 event_fields = {
+    "id": fields.Integer,
     "name": fields.String,
     "venue": fields.String,
     "created_by": fields.String
@@ -35,3 +36,48 @@ class CreateEvent(Resource):
         db.session.add(event)
         db.session.commit()
         return marshal(event, event_fields), 201
+
+    @jwt_required
+    def get(self):
+        all_events = Event.query.all()
+        return marshal(all_events, event_fields), 200
+
+
+class ViewEvent(Resource):
+    """ Enables logged-in users to view specific event:
+    """
+
+    @jwt_required
+    def get(self, id):
+
+        if id:
+            event = Event.query.get(id)
+
+            if event:
+                return marshal(event, event_fields), 200
+            else:
+                return {"message": "no such event"}, 404
+
+    @jwt_required
+    def put(self, id):
+        user = get_jwt_identity()
+
+        if id:
+            event = Event.query.filter_by(id=id, created_by=user).first()
+
+            if event:
+                parser = RequestParser()
+                parser.add_argument("name", type=str)
+                parser.add_argument("venue", type=str)
+                args = parser.parse_args()
+
+                event = Event(
+                    name=args.name,
+                    venue=args.venue,
+                    created_by=user
+                )
+                db.session.add(event)
+                db.session.commit()
+                return marshal(event, event_fields), 200
+            else:
+                return {"message": "no such event"}, 404
