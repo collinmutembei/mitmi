@@ -71,11 +71,9 @@ class ViewEvent(Resource):
                 parser.add_argument("venue", type=str)
                 args = parser.parse_args()
 
-                event = Event(
-                    name=args.name,
-                    venue=args.venue,
-                    created_by=user
-                )
+                event.name = args.name or event.name
+                event.venue = args.venue or event.venue
+
                 db.session.add(event)
                 db.session.commit()
                 return marshal(event, event_fields), 200
