@@ -79,3 +79,17 @@ class ViewEvent(Resource):
                 return marshal(event, event_fields), 200
             else:
                 return {"message": "no such event"}, 404
+
+    @jwt_required
+    def delete(self, id):
+        user = get_jwt_identity()
+
+        if id:
+            event = Event.query.filter_by(id=id, created_by=user).first()
+
+            if event:
+                db.session.delete(event)
+                db.session.commit()
+                return marshal(event, event_fields), 204
+            else:
+                return {"message": "no such event"}, 404

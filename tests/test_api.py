@@ -326,6 +326,9 @@ class MITMITestCase(unittest.TestCase):
         )
         self.assertEqual(updated_event.status_code, 200)
 
+        response = json.loads(updated_event.data)
+        self.assertEqual(response["venue"], "kejani")
+
     def test_logged_in_user_cannot_update_an_event_they_did_not_create(self):
         """ assert that users who have been authenticated cannot
         update an event created by someone else
@@ -433,6 +436,155 @@ class MITMITestCase(unittest.TestCase):
             }
         )
         self.assertEqual(updated_event.status_code, 401)
+
+    def test_logged_in_user_delete_an_event_they_created(self):
+        """ assert that users who have been authenticated can
+        delete an event they created
+        """
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "party",
+                "venue": "house"
+            }
+        )
+
+        existing_event = Event.query.filter_by(
+            name="party"
+        ).first()
+        deleted_event = self.client.delete(
+            "/event/{0}/".format(existing_event.id),
+            headers={
+                "Authorization": "Bearer {0}".format(user_token)
+            }
+        )
+        self.assertEqual(deleted_event.status_code, 204)
+
+    def test_logged_in_user_cannot_delete_event_they_did_not_create(self):
+        """ assert that users who have been authenticated cannot
+        delete an event created by someone else
+        """
+        other_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(other_user)
+        db.session.commit()
+
+        signin_other_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_other_user.data)
+        user_token = signin["token"]
+
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "party",
+                "venue": "house"
+            }
+        )
+
+        test_user = User(
+            username="test_user",
+            password="test_password"
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": "test_user",
+                "password": "test_password"
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        existing_event = Event.query.filter_by(
+            name="party"
+        ).first()
+        deleted_event = self.client.delete(
+            "/event/{0}/".format(existing_event.id),
+            headers={
+                "Authorization": "Bearer {0}".format(user_token)
+            }
+        )
+        self.assertEqual(deleted_event.status_code, 404)
+
+    def test_not_logged_in_user_cannot_delete_an_event(self):
+        """ assert that users who have not been authenticated cannot
+        delete events
+        """
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
+        signin_test_user = self.client.post(
+            'signin/',
+            data={
+                "username": self.test_username,
+                "password": self.test_password
+            }
+        )
+        signin = json.loads(signin_test_user.data)
+        user_token = signin["token"]
+
+        event = self.client.post(
+            "/event/",
+            headers={
+                "Authorization": "Bearer {0}".format(user_token),
+                "Accept": "application/json"
+            },
+            data={
+                "name": "party",
+                "venue": "house"
+            }
+        )
+
+        existing_event = Event.query.filter_by(
+            name="party"
+        ).first()
+        deleted_event = self.client.delete(
+            "/event/{0}/".format(existing_event.id),
+            data={
+                "venue": "kejani"
+            }
+        )
+        self.assertEqual(deleted_event.status_code, 401)
 
 if __name__ == '__main__':
     unittest.main()
