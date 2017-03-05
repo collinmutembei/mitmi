@@ -17,8 +17,8 @@
     - [x] No DELETE
 - [ ] CRUD operations on events
   - [x] As a logged in user I should be able to CREATE an event using a name and location
-  - [ ] As a logged in user I can see all events
-  - [ ] As a logged in user and creator of event I should be able to UPDATE the event details
+  - [x] As a logged in user I can see all events
+  - [x] As a logged in user and creator of event I should be able to UPDATE the event details
   - [ ] As a logged in user and creator of event I should be able to DELETE
 
 #### License

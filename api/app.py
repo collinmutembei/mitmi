@@ -24,9 +24,10 @@ app.config.from_object(config[config_name])
 
 # import in the middle of code to avoid cyclic imports
 from api.users.resources import SignUp, SignIn
-from api.events.resources import CreateEvent
+from api.events.resources import CreateEvent, ViewEvent
 
 api.add_resource(SignUp, '/signup/')
 api.add_resource(SignIn, '/signin/')
 
 api.add_resource(CreateEvent, '/event/')
+api.add_resource(ViewEvent, '/event/<int:id>/')
