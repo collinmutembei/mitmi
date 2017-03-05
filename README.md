@@ -15,11 +15,11 @@
     - [x] No READ
     - [x] No UPDATE
     - [x] No DELETE
-- [ ] CRUD operations on events
+- [x] CRUD operations on events
   - [x] As a logged in user I should be able to CREATE an event using a name and location
   - [x] As a logged in user I can see all events
   - [x] As a logged in user and creator of event I should be able to UPDATE the event details
-  - [ ] As a logged in user and creator of event I should be able to DELETE
+  - [x] As a logged in user and creator of event I should be able to DELETE
 
 #### License
 This project is licensed under GNU GPL v3 &copy; Collin Mutembei <whenyourepissed@gmail.com>

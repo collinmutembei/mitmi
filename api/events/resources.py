@@ -4,12 +4,14 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from api.app import db
 from api.events.models import Event
+from api.users.resources import user_fields
 
 event_fields = {
     "id": fields.Integer,
     "name": fields.String,
     "venue": fields.String,
-    "created_by": fields.String
+    "created_by": fields.String,
+    "guest": fields.List(fields.Nested(user_fields)),
 }
 
 
