@@ -8,7 +8,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     _password = db.Column(db.String(128))
-    authenticated = db.Column(db.Boolean, default=False)
 
     @hybrid_property
     def password(self):
