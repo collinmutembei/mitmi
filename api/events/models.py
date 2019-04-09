@@ -1,5 +1,5 @@
-from api.app import db
-from api.users.models import User
+from ..app import db
+from ..users.models import User
 
 guests = db.Table(
     'guests',
