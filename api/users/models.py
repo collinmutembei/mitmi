@@ -1,5 +1,6 @@
-from api.app import db, bcrypt
 from sqlalchemy.ext.hybrid import hybrid_property
+
+from ..app import bcrypt, db
 
 
 class User(db.Model):
@@ -19,7 +20,7 @@ class User(db.Model):
     def _set_password(self, plaintext):
         """Hashes a password from plaintext to ciphertext
         """
-        self._password = bcrypt.generate_password_hash(plaintext)
+        self._password = bcrypt.generate_password_hash(plaintext).decode('utf-8')
 
     def verify_password(self, plaintext):
         """Checks the entered paintext against the hashed password

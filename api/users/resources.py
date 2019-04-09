@@ -2,8 +2,8 @@ from flask_restful import Resource, fields, marshal
 from flask_restful.reqparse import RequestParser
 from flask_jwt_extended import create_access_token
 
-from api.app import db
-from api.users.models import User
+from ..app import db
+from ..users.models import User
 
 user_fields = {
     'username': fields.String,

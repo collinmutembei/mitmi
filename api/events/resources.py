@@ -2,9 +2,9 @@ from flask_restful import Resource, fields, marshal
 from flask_restful.reqparse import RequestParser
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from api.app import db
-from api.events.models import Event
-from api.users.resources import user_fields
+from ..app import db
+from ..events.models import Event
+from ..users.resources import user_fields
 
 event_fields = {
     "id": fields.Integer,
