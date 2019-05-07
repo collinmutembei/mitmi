@@ -16,10 +16,10 @@ class User(db.Model):
         return self._password
 
     @password.setter
-    def _set_password(self, plaintext):
+    def password(self, plaintext):
         """Hashes a password from plaintext to ciphertext
         """
-        self._password = bcrypt.generate_password_hash(plaintext)
+        self._password = bcrypt.generate_password_hash(plaintext).decode('utf-8')
 
     def verify_password(self, plaintext):
         """Checks the entered paintext against the hashed password

@@ -91,3 +91,6 @@ ENV/
 
 # project plan
 plan.md
+
+# IDE
+.vscode

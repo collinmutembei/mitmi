@@ -23,6 +23,13 @@ class MITMITestCase(unittest.TestCase):
         self.test_username = "patientzer0"
         self.test_password = "YmlnZ2VzdGJlaGluZA"
 
+        test_user = User(
+            username=self.test_username,
+            password=self.test_password
+        )
+        db.session.add(test_user)
+        db.session.commit()
+
     def tearDown(self):
         db.session.remove()
         db.drop_all()
@@ -55,12 +62,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that POST request on signup resource with username
         matching an already existing user
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signup_post = self.client.post(
             "/signup/",
@@ -97,12 +98,6 @@ class MITMITestCase(unittest.TestCase):
     def test_getting_token_for_existing_user(self):
         """ assert that signin for valid user gets token
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_post = self.client.post(
             "/signin/",
@@ -117,12 +112,6 @@ class MITMITestCase(unittest.TestCase):
     def test_getting_token_for_existing_user_with_wrong_password(self):
         """ assert that signin for valid user with wrong password
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_post = self.client.post(
             "/signin/",
@@ -153,12 +142,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated can
         create event
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_test_user = self.client.post(
             'signin/',
@@ -201,12 +184,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated can
         view all events
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_test_user = self.client.post(
             'signin/',
@@ -245,12 +222,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated can
         view all events
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_test_user = self.client.post(
             'signin/',
@@ -283,12 +254,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated can
         update an event they created
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_test_user = self.client.post(
             'signin/',
@@ -333,9 +298,12 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated cannot
         update an event created by someone else
         """
+        f_username = self.fake.user_name()
+        f_password = self.fake.password()
+
         other_user = User(
-            username=self.test_username,
-            password=self.test_password
+            username=f_username,
+            password=f_password
         )
         db.session.add(other_user)
         db.session.commit()
@@ -343,8 +311,8 @@ class MITMITestCase(unittest.TestCase):
         signin_other_user = self.client.post(
             'signin/',
             data={
-                "username": self.test_username,
-                "password": self.test_password
+                "username": f_username,
+                "password": f_password
             }
         )
         signin = json.loads(signin_other_user.data)
@@ -397,12 +365,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have not been authenticated cannot
         update events
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_test_user = self.client.post(
             'signin/',
@@ -441,12 +403,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated can
         delete an event they created
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_test_user = self.client.post(
             'signin/',
@@ -485,18 +441,22 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have been authenticated cannot
         delete an event created by someone else
         """
+        f_username = self.fake.user_name()
+        f_password = self.fake.password()
+
         other_user = User(
-            username=self.test_username,
-            password=self.test_password
+            username=f_username,
+            password=f_password
         )
+
         db.session.add(other_user)
         db.session.commit()
 
         signin_other_user = self.client.post(
             'signin/',
             data={
-                "username": self.test_username,
-                "password": self.test_password
+                "username": f_username,
+                "password": f_password
             }
         )
         signin = json.loads(signin_other_user.data)
@@ -546,12 +506,6 @@ class MITMITestCase(unittest.TestCase):
         """ assert that users who have not been authenticated cannot
         delete events
         """
-        test_user = User(
-            username=self.test_username,
-            password=self.test_password
-        )
-        db.session.add(test_user)
-        db.session.commit()
 
         signin_test_user = self.client.post(
             'signin/',
