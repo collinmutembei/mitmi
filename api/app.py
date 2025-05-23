@@ -12,7 +12,7 @@ from api.config import config
 app = Flask(__name__)
 api = Api(app)
 bcrypt = Bcrypt(app)
-db = SQLAlchemy(app)
+db = SQLAlchemy() # Changed: app object no longer passed here
 jwt = JWTManager(app)
 
 # import in the middle of code to avoid cyclic imports
@@ -21,6 +21,7 @@ from api.users.models import User
 # Set the config for app
 config_name = os.environ.get('APP_SETTINGS', 'default')
 app.config.from_object(config[config_name])
+db.init_app(app) # New: Initialize db with app here, after config is loaded
 
 # import in the middle of code to avoid cyclic imports
 from api.users.resources import SignUp, SignIn

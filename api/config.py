@@ -30,10 +30,12 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     """configuration for when testing"""
     TESTING = True
-    if os.getenv('TRAVIS_BUILD', None):
-        SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
-    else:
-        SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DB_URL')
+    # Prioritize SQLALCHEMY_DATABASE_URI if set by the environment,
+    # then fall back to TEST_DB_URL (often used for local test setups).
+    # If neither is found, it will inherit the value from the base Config class (which looks for DATABASE_URL).
+    # Flask-SQLAlchemy will default to sqlite if no URI is ultimately found and issue a warning.
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI') or \
+                              os.environ.get('TEST_DB_URL')
 
 
 config = {
