@@ -1,0 +1,1851 @@
+/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py:872: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+  warnings.warn(FSADeprecationWarning(
+test_creating_new_user (test_api.MITMITestCase)
+assert that POST request on signup resource creates new user ... ERROR
+test_creating_new_user_with_missing_field (test_api.MITMITestCase)
+assert that POST request on signup resource fails if required ... ERROR
+test_creating_new_user_with_username_of_existing_user (test_api.MITMITestCase)
+assert that POST request on signup resource with username ... ERROR
+test_get_method_not_allowed_on_signin (test_api.MITMITestCase)
+assert that GET request are not allowed on signin resource ... ERROR
+test_get_method_not_allowed_on_signup (test_api.MITMITestCase)
+assert that GET request are not allowed on signup resource ... ERROR
+test_getting_token_for_existing_user (test_api.MITMITestCase)
+assert that signin for valid user gets token ... ERROR
+test_getting_token_for_existing_user_with_wrong_password (test_api.MITMITestCase)
+assert that signin for valid user with wrong password ... ERROR
+test_getting_token_for_non_existing_user (test_api.MITMITestCase)
+assert that signin for invalid user fails ... ERROR
+test_logged_in_user_can_create_event (test_api.MITMITestCase)
+assert that users who have been authenticated can ... ERROR
+test_logged_in_user_can_view_event (test_api.MITMITestCase)
+assert that users who have been authenticated can ... ERROR
+test_logged_in_user_can_view_specific_event (test_api.MITMITestCase)
+assert that users who have been authenticated can ... ERROR
+test_logged_in_user_cannot_delete_event_they_did_not_create (test_api.MITMITestCase)
+assert that users who have been authenticated cannot ... ERROR
+test_logged_in_user_cannot_update_an_event_they_did_not_create (test_api.MITMITestCase)
+assert that users who have been authenticated cannot ... ERROR
+test_logged_in_user_delete_an_event_they_created (test_api.MITMITestCase)
+assert that users who have been authenticated can ... ERROR
+test_logged_in_user_update_an_event_they_created (test_api.MITMITestCase)
+assert that users who have been authenticated can ... ERROR
+test_not_logged_in_user_cannot_create_event (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot ... ERROR
+test_not_logged_in_user_cannot_delete_an_event (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot ... ERROR
+test_not_logged_in_user_cannot_update_an_event (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot ... ERROR
+test_not_logged_in_user_cannot_view_events (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot ... ERROR
+
+======================================================================
+ERROR: test_creating_new_user (test_api.MITMITestCase)
+assert that POST request on signup resource creates new user
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_creating_new_user_with_missing_field (test_api.MITMITestCase)
+assert that POST request on signup resource fails if required
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_creating_new_user_with_username_of_existing_user (test_api.MITMITestCase)
+assert that POST request on signup resource with username
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_get_method_not_allowed_on_signin (test_api.MITMITestCase)
+assert that GET request are not allowed on signin resource
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_get_method_not_allowed_on_signup (test_api.MITMITestCase)
+assert that GET request are not allowed on signup resource
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_getting_token_for_existing_user (test_api.MITMITestCase)
+assert that signin for valid user gets token
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_getting_token_for_existing_user_with_wrong_password (test_api.MITMITestCase)
+assert that signin for valid user with wrong password
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_getting_token_for_non_existing_user (test_api.MITMITestCase)
+assert that signin for invalid user fails
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_logged_in_user_can_create_event (test_api.MITMITestCase)
+assert that users who have been authenticated can
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_logged_in_user_can_view_event (test_api.MITMITestCase)
+assert that users who have been authenticated can
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_logged_in_user_can_view_specific_event (test_api.MITMITestCase)
+assert that users who have been authenticated can
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_logged_in_user_cannot_delete_event_they_did_not_create (test_api.MITMITestCase)
+assert that users who have been authenticated cannot
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_logged_in_user_cannot_update_an_event_they_did_not_create (test_api.MITMITestCase)
+assert that users who have been authenticated cannot
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_logged_in_user_delete_an_event_they_created (test_api.MITMITestCase)
+assert that users who have been authenticated can
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_logged_in_user_update_an_event_they_created (test_api.MITMITestCase)
+assert that users who have been authenticated can
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_not_logged_in_user_cannot_create_event (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_not_logged_in_user_cannot_delete_an_event (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_not_logged_in_user_cannot_update_an_event (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+======================================================================
+ERROR: test_not_logged_in_user_cannot_view_events (test_api.MITMITestCase)
+assert that users who have not been authenticated cannot
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/tests/test_api.py", line 21, in setUp
+    db.create_all()
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/app/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4286, in create_all
+    bind._run_visitor(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2032, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2024, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2226, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2265, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1536, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 383, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 128, in reraise
+    raise value.with_traceback(tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2262, in _wrap_pool_connect
+    return fn()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 760, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 138, in _do_get
+    with util.safe_reraise():
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 129, in reraise
+    raise value
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 639, in __connect
+    connection = pool._invoke_creator(self)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 453, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/app/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.372s
+
+FAILED (errors=19)
+\n--- manage.py test exited with code 0 (SUCCESS) ---

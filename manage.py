@@ -1,3 +1,4 @@
+from dotenv import load_dotenv, find_dotenv; load_dotenv(find_dotenv()) # Added this line
 import unittest
 
 from flask_script import Manager

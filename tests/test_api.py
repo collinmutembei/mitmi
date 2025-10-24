@@ -13,7 +13,7 @@ from api.events.models import Event
 class MITMITestCase(unittest.TestCase):
 
     def setUp(self):
-        app.config.from_object(config['testing'])
+        # app.config.from_object(config['testing']) # Line removed as per instruction
         self.client = app.test_client()
 
         self.fake = Faker()
